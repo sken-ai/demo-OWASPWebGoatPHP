@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+  scan:
+    machine: true
+    steps:
+
+      - checkout
+      - run:
+          name: Install
+          command: pip install --user --upgrade skencli
+
+      - run:
+          name: Scan
+          command: skencli
+
+workflows:
+  main:
+    jobs:
+      - scan
