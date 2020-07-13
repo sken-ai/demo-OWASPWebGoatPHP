@@ -1,17 +1,30 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  scan:
     machine: true
     steps:
+
       - checkout
+
       - run:
-          name: "Switch to Python v3.6.9"
+          name: Update pyenv
           command: |
-            pyenv versions
-            pyenv global 3.6.9
+            # Install pyenv-update to allow addition of python 3.7.0
+            git clone git://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
+            pyenv update
+            pyenv install 3.6.9
       - run:
-          name: "Install skencli"
-          command: pip install skencli
+          name: Set Python Version
+          command: pyenv global 3.6.9
+
+      - run:
+          name: Install skencli
+          command: pip install --upgrade skencli
+
+      - run:
+          name: Scan
+          command: skencli
+
 workflows:
   main:
     jobs:
