@@ -5,12 +5,17 @@ jobs:
     steps:
 
       - checkout
+      
       - run:
-          name: Install
+          name: "Set Python Version"
+          command: pyenv global 3.7.0
+
+      - run:
+          name: "Install"
           command: pip install --user --upgrade skencli
 
       - run:
-          name: Scan
+          name: "Scan"
           command: skencli
 
 workflows:
