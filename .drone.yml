@@ -1,0 +1,20 @@
+---
+kind: pipeline
+type: exec
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: Install skencli
+  commands:
+  - pip install --upgrade skencli
+- name: Run skencli
+  commands:
+  - skencli
+
+trigger:
+  branch:
+  - drone-ci
